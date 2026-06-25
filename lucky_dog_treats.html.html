@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Dog Treats — Baked with Love, Given with Purpose</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FBF6EF;
+    --warm-white: #FFFCF8;
+    --caramel: #C97B3A;
+    --caramel-dark: #9A5C22;
+    --caramel-light: #F3DFC0;
+    --caramel-pale: #FBF0E0;
+    --bark: #3D2B1A;
+    --bark-mid: #6B4A2E;
+    --sage: #6B8C6A;
+    --sage-light: #E8F0E8;
+    --text: #2C1F10;
+    --text-mid: #5A4030;
+    --text-muted: #8C6E52;
+    --border: rgba(61, 43, 26, 0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Lora', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--caramel-dark);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .paw {
+    font-size: 1.4rem;
+  }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--caramel); }
+
+  .nav-cta {
+    background: var(--caramel);
+    color: white !important;
+    padding: 0.45rem 1.1rem;
+    border-radius: 50px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--caramel-dark) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    background: var(--warm-white);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    background: var(--caramel-pale);
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 600;
+    color: var(--bark);
+    line-height: 1.2;
+    max-width: 700px;
+    margin: 0 auto 1.25rem;
+  }
+
+  .hero h1 em {
+    color: var(--caramel);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-mid);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .hero-buttons {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.75rem 1.8rem;
+    border-radius: 50px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--caramel);
+    color: white;
+  }
+
+  .btn-primary:hover { background: var(--caramel-dark); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--caramel-dark);
+    border: 1.5px solid var(--caramel);
+  }
+
+  .btn-outline:hover { background: var(--caramel-pale); transform: translateY(-1px); }
+
+  .hero-treats {
+    margin-top: 3.5rem;
+    display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+
+  .treat-badge {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1rem 1.4rem;
+    text-align: center;
+    min-width: 110px;
+  }
+
+  .treat-badge .icon { font-size: 2rem; margin-bottom: 0.3rem; display: block; }
+  .treat-badge .label { font-size: 0.78rem; font-weight: 600; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* SECTION BASE */
+  section { padding: 5rem 2rem; }
+
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 0.6rem;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 600;
+    color: var(--bark);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    max-width: 560px;
+  }
+
+  /* MISSION STRIP */
+  .mission-strip {
+    background: var(--bark);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .mission-strip p {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--caramel-light);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .mission-strip span { color: white; font-style: normal; }
+
+  /* SHOP */
+  .shop { background: var(--cream); }
+
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .product-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(61,43,26,0.1); }
+
+  .product-img {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+  }
+
+  .product-img.bg1 { background: #FFF3E8; }
+  .product-img.bg2 { background: #F0F7F0; }
+  .product-img.bg3 { background: #FFF0F5; }
+  .product-img.bg4 { background: #FFFAE8; }
+
+  .product-body { padding: 1.25rem 1.4rem 1.5rem; }
+
+  .product-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.3rem;
+  }
+
+  .product-name {
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.4rem;
+  }
+
+  .product-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .product-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .product-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--caramel-dark);
+  }
+
+  .product-price span {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .btn-add {
+    background: var(--caramel-pale);
+    color: var(--caramel-dark);
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-add:hover { background: var(--caramel-light); }
+
+  .shop-note {
+    margin-top: 2rem;
+    text-align: center;
+    background: var(--sage-light);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    font-size: 0.92rem;
+    color: var(--sage);
+    font-weight: 500;
+  }
+
+  /* ABOUT */
+  .about { background: var(--warm-white); }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    background: var(--caramel-pale);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .about-big-icon { font-size: 6rem; margin-bottom: 1rem; display: block; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .stat {
+    background: white;
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Lora', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--caramel);
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+  }
+
+  .about-content .section-desc { margin-bottom: 1.5rem; }
+
+  .values-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+
+  .values-list li {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    font-size: 0.95rem; color: var(--text-mid);
+  }
+
+  .values-list li::before {
+    content: '♥';
+    color: var(--caramel);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  /* DONATE */
+  .donate { background: var(--cream); }
+
+  .donate-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .donate-card {
+    background: var(--bark);
+    border-radius: 24px;
+    padding: 2.5rem;
+    color: var(--caramel-light);
+  }
+
+  .donate-card .section-label { color: var(--caramel); }
+  .donate-card .section-title { color: white; }
+  .donate-card p { color: var(--caramel-light); margin-bottom: 2rem; }
+
+  .donate-amounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .amount-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 0.8rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: white;
+    font-family: 'Lora', serif;
+  }
+
+  .amount-btn:hover, .amount-btn.active {
+    background: var(--caramel);
+    border-color: var(--caramel);
+  }
+
+  .amount-num { font-size: 1.25rem; font-weight: 600; display: block; }
+  .amount-label { font-size: 0.72rem; color: rgba(255,255,255,0.6); display: block; margin-top: 0.15rem; font-family: 'Inter', sans-serif; }
+
+  .donate-btn {
+    display: block;
+    width: 100%;
+    background: var(--caramel);
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: center;
+  }
+
+  .donate-btn:hover { background: #b86e30; }
+
+  .impact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .impact-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.2rem;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+
+  .impact-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+  .impact-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--bark);
+    margin-bottom: 0.2rem;
+  }
+
+  .impact-text span { font-size: 0.85rem; color: var(--text-muted); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bark);
+    color: var(--caramel-light);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-tagline {
+    font-size: 0.88rem;
+    color: var(--caramel-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-links {
+    display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .footer-links a {
+    color: rgba(243,223,192,0.7);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--caramel-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    font-size: 0.8rem;
+    color: rgba(243,223,192,0.5);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .about-inner, .donate-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+    .hero { padding: 3.5rem 1.5rem 3rem; }
+    section { padding: 3.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <span class="paw">🐾</span> Lucky Dog Treats
+  </a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#donate" class="nav-cta">Donate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-eyebrow">Nonprofit Bakery · Est. 2026</div>
+  <h1>Baked with Love,<br><em>Given with Purpose</em></h1>
+  <p class="hero-sub">Every treat we bake funds food, shelter, and care for dogs in need. Your pup gets a snack — a rescue dog gets a second chance. (idk if you want labs and more mentioned)</p>
+  <div class="hero-buttons">
+    <a href="#shop" class="btn btn-primary">Shop Treats</a>
+    <a href="#donate" class="btn btn-outline">Make a Donation</a>
+  </div>
+  <div class="hero-treats">
+    <div class="treat-badge">
+      <span class="icon">🦴</span>
+      <span class="label">All-Natural (switch for actual labels)</span>
+    </div>
+    <div class="treat-badge">
+      <span class="icon">🌾</span>
+      <span class="label">Grain-Friendly (switch for actual labels)</span>
+    </div>
+    <div class="treat-badge">
+      <span class="icon">♻️</span>
+      <span class="label">Eco Packaged (switch for actual labels)</span>
+    </div>
+    <div class="treat-badge">
+      <span class="icon">🏠</span>
+      <span class="label">Shelter Funded (switch for actual labels)</span>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION STRIP -->
+<div class="mission-strip">
+  <p><span>100% of profits</span> go toward feeding and sheltering dogs waiting for their forever home. <span>No exceptions.</span></p>
+</div>
+
+<!-- SHOP -->
+<section class="shop" id="shop">
+  <div class="section-inner">
+    <div class="section-label">Our Treats</div>
+    <h2 class="section-title">Tail-wagging flavors,<br>handmade fresh</h2>
+    <p class="section-desc">Description/ad of treats goes here.</p>
+
+    <div class="shop-grid">
+      <div class="product-card">
+        <div class="product-img bg1">🥜</div>
+        <div class="product-body">
+          <div class="product-tag">Bestseller</div>
+          <div class="product-name">Treat 1</div>
+          <p class="product-desc">Treat 1 description goes here.</p>
+          <div class="product-footer">
+            <div class="product-price">$12 <span>/ 20 treats</span></div>
+            <a href="#donate" class="btn-add">Add to bag</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img bg2">🥕</div>
+        <div class="product-body">
+          <div class="product-tag">Vet's Pick</div>
+          <div class="product-name">Treat 2</div>
+          <p class="product-desc">Treat 2 description goes here.</p>
+          <div class="product-footer">
+            <div class="product-price">$10 <span>/ 24 treats</span></div>
+            <a href="#donate" class="btn-add">Add to bag</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img bg3">🫐</div>
+        <div class="product-body">
+          <div class="product-tag">New Arrival</div>
+          <div class="product-name">Treat 3</div>
+          <p class="product-desc">Treat 3 description goes here.</p>
+          <div class="product-footer">
+            <div class="product-price">$14 <span>/ 16 chews</span></div>
+            <a href="#donate" class="btn-add">Add to bag</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img bg4">🎁</div>
+        <div class="product-body">
+          <div class="product-tag">Gift Set</div>
+          <div class="product-name">Treat 4</div>
+          <p class="product-desc">Treat 4 description goes here.</p>
+          <div class="product-footer">
+            <div class="product-price">$32 <span>/ variety box</span></div>
+            <a href="#donate" class="btn-add">Add to bag</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shop-note">
+      🌱 All treats are sugar free and don't cause cancer or something. Maybe get reviewed by a vet to say reviewed by veterinaria professional.
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-inner">
+      <div class="about-visual">
+        <span class="about-big-icon">🐶</span>
+        <div style="font-family: 'Lora', serif; font-style: italic; font-size: 1.05rem; color: var(--bark-mid);">Every bite makes a difference</div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Dogs fed this year</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Shelter partners</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Profits donated</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Happy customers</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">Started with one rescue.<br>Grown into a movement.</h2>
+        <p class="section-desc">Lucky Dog Treats was born when... We wanted to give back, so we started baking.</p>
+        <p class="section-desc" style="margin-top: 1rem;">Every bag sold directly funds meals, medical care, and enrichment activities for dogs in local (our partnered if you get them) shelters. We keep overhead low and give the rest.</p>
+
+        <ul class="values-list" style="margin-top: 1.75rem;">
+          <li>Transparent finances — our full annual report is publicly available (doesn't apply if not a business)</li>
+          <li>No intermediaries — we work directly with local shelters</li>
+          <li>Small-batch baking ensures freshness and quality in every bag</li>
+          <li>Packaging is 100% recyclable or compostable (remove if untrue)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section class="donate" id="donate">
+  <div class="section-inner">
+    <div class="donate-inner">
+      <div class="donate-card">
+        <div class="section-label">Make a Gift</div>
+        <h2 class="section-title" style="font-size: 1.8rem;">Every dollar goes<br>straight to the dogs</h2>
+        <p>Your one-time or monthly gift provides food, vet care, and love for dogs waiting for their families.</p>
+
+        <div class="donate-amounts">
+          <div class="amount-btn">
+            <span class="amount-num">$10</span>
+            <span class="amount-label">Feeds 1 dog for a week (Get accurate numbers from a shelter)</span>
+          </div>
+          <div class="amount-btn active">
+            <span class="amount-num">$25</span>
+            <span class="amount-label">Covers a vet checkup</span>
+          </div>
+          <div class="amount-btn">
+            <span class="amount-num">$50</span>
+            <span class="amount-label">Sponsors a rescue</span>
+          </div>
+          <div class="amount-btn">
+            <span class="amount-num">$100</span>
+            <span class="amount-label">Funds a foster family</span>
+          </div>
+        </div>
+
+        <button class="donate-btn">Donate Now ♥</button>
+      </div>
+
+      <div>
+        <div class="section-label">Your Impact</div>
+        <h2 class="section-title">Where your money goes</h2>
+        <p class="section-desc" style="margin-bottom: 0;">We're committed to radical transparency. Here's what every dollar funds:</p>
+
+        <div class="impact-list">
+          <div class="impact-item">
+            <div class="impact-icon">🍽️</div>
+            <div class="impact-text">
+              <strong>Daily meals at local/partner shelters</strong>
+              <span>Nutritious kibble and fresh water for every dog in our network, every single day.</span>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">🩺</div>
+            <div class="impact-text">
+              <strong>Routine and emergency vet care</strong>
+              <span>Vaccinations, checkups, spay/neuter procedures, and urgent treatments when needed.</span>
+            </div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-icon">🏡</div>
+            <div class="impact-text">
+              <strong>Enrichment and adoption support</strong>
+              <span>Toys, training sessions, and adoption event costs to help dogs find homes faster.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🐾 Lucky Dog Treats</div>
+  <div class="footer-tagline">A nonprofit bakery baking treats, changing lives.</div>
+  <ul class="footer-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#donate">Donate</a></li>
+    <li><a href="mailto:jake.mordan@gmail.com">Contact</a></li>
+  </ul>
+  <div class="footer-bottom">
+    © 2026 Lucky Dog Treats · Nonprofit · Email:<br>
+    <span style="margin-top: 0.4rem; display: block;">Made with ♥ for every dog still waiting for their home</span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
