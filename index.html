@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Dog Treats</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FBF6EF;--warm-white:#FFFCF8;--caramel:#C97B3A;--caramel-dark:#9A5C22;
+  --caramel-light:#F3DFC0;--caramel-pale:#FBF0E0;--bark:#3D2B1A;--bark-mid:#6B4A2E;
+  --sage:#6B8C6A;--sage-light:#E8F0E8;--text:#2C1F10;--text-mid:#5A4030;
+  --text-muted:#8C6E52;--border:rgba(61,43,26,0.12);
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--cream);color:var(--text);line-height:1.7;min-height:100vh}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--warm-white);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:Georgia,serif;font-size:1.2rem;font-weight:600;color:var(--caramel-dark);text-decoration:none;display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:0.88rem;font-weight:500;color:var(--text-mid);transition:color 0.2s}
+.nav-links a:hover{color:var(--caramel)}
+.nav-cta{background:var(--caramel);color:white!important;padding:0.4rem 1rem;border-radius:50px}
+.nav-cta:hover{background:var(--caramel-dark)!important}
+.cart-btn{background:none;border:1.5px solid var(--caramel);border-radius:50px;padding:0.35rem 0.9rem;font-size:0.88rem;font-weight:600;color:var(--caramel-dark);cursor:pointer;display:flex;align-items:center;gap:6px;transition:background 0.2s}
+.cart-btn:hover{background:var(--caramel-pale)}
+.cart-badge{background:var(--caramel);color:white;border-radius:50px;font-size:0.7rem;font-weight:700;padding:1px 6px;display:none}
+.cart-badge.show{display:inline-block}
+
+/* HERO */
+.hero{background:var(--warm-white);padding:4rem 1.5rem 3rem;text-align:center}
+.eyebrow{display:inline-block;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--caramel);background:var(--caramel-pale);padding:0.25rem 0.9rem;border-radius:50px;margin-bottom:1.25rem}
+.hero h1{font-family:Georgia,serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:600;color:var(--bark);line-height:1.2;margin-bottom:1rem}
+.hero h1 em{color:var(--caramel);font-style:italic}
+.hero-sub{font-size:1rem;color:var(--text-mid);max-width:500px;margin:0 auto 2rem}
+.hero-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:0.9rem;padding:0.65rem 1.5rem;border-radius:50px;transition:all 0.2s;cursor:pointer;border:none}
+.btn-primary{background:var(--caramel);color:white}
+.btn-primary:hover{background:var(--caramel-dark)}
+.btn-outline{background:transparent;color:var(--caramel-dark);border:1.5px solid var(--caramel)}
+.btn-outline:hover{background:var(--caramel-pale)}
+.badges{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.badge{background:var(--warm-white);border:1px solid var(--border);border-radius:14px;padding:0.75rem 1rem;text-align:center;min-width:90px}
+.badge .bi{font-size:1.6rem;display:block;margin-bottom:0.2rem}
+.badge .bl{font-size:0.7rem;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:0.04em}
+
+/* MISSION */
+.mission{background:var(--bark);padding:2rem 1.5rem;text-align:center}
+.mission p{font-family:Georgia,serif;font-size:clamp(1rem,2.5vw,1.3rem);font-style:italic;color:var(--caramel-light);max-width:650px;margin:0 auto;line-height:1.6}
+.mission span{color:white;font-style:normal}
+
+/* SECTIONS */
+section{padding:4rem 1.5rem}
+.inner{max-width:1000px;margin:0 auto}
+.sec-label{font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--caramel);margin-bottom:0.5rem}
+.sec-title{font-family:Georgia,serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;color:var(--bark);line-height:1.25;margin-bottom:0.9rem}
+.sec-desc{font-size:1rem;color:var(--text-mid);max-width:520px}
+
+/* SHOP */
+.shop{background:var(--cream)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.25rem;margin-top:2.5rem}
+.card{background:var(--warm-white);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform 0.2s}
+.card:hover{transform:translateY(-3px)}
+.card-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:4rem}
+.card-body{padding:1.1rem 1.25rem 1.3rem}
+.card-tag{font-size:0.7rem;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:var(--sage);margin-bottom:0.25rem}
+.card-name{font-family:Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--bark);margin-bottom:0.35rem}
+.card-desc{font-size:0.82rem;color:var(--text-muted);margin-bottom:0.9rem;line-height:1.5}
+.card-foot{display:flex;align-items:center;justify-content:space-between}
+.card-price{font-size:1rem;font-weight:600;color:var(--caramel-dark)}
+.card-price span{font-size:0.75rem;font-weight:400;color:var(--text-muted)}
+.add-btn{background:var(--caramel-pale);color:var(--caramel-dark);border:none;padding:0.38rem 0.9rem;border-radius:50px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:background 0.2s}
+.add-btn:hover{background:var(--caramel-light)}
+.add-btn.added{background:var(--sage-light);color:var(--sage)}
+.shop-note{margin-top:1.75rem;background:var(--sage-light);border-radius:14px;padding:1rem 1.25rem;font-size:0.88rem;color:var(--sage);font-weight:500;text-align:center}
+
+/* ABOUT */
+.about{background:var(--warm-white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-vis{background:var(--caramel-pale);border-radius:20px;padding:2.5rem 1.5rem;text-align:center}
+.big-icon{font-size:5rem;display:block;margin-bottom:0.75rem}
+.about-vis p{font-family:Georgia,serif;font-style:italic;font-size:0.95rem;color:var(--bark-mid)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1.25rem}
+.stat{background:white;border-radius:12px;padding:0.9rem;text-align:center}
+.stat-n{font-family:Georgia,serif;font-size:1.6rem;font-weight:600;color:var(--caramel)}
+.stat-l{font-size:0.72rem;color:var(--text-muted);margin-top:0.1rem}
+.values{list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin-top:1.5rem}
+.values li{display:flex;gap:0.6rem;align-items:flex-start;font-size:0.9rem;color:var(--text-mid)}
+.values li::before{content:'♥';color:var(--caramel);font-size:0.75rem;margin-top:0.3rem;flex-shrink:0}
+
+/* DONATE */
+.donate{background:var(--cream)}
+.donate-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.donate-card{background:var(--bark);border-radius:20px;padding:2rem}
+.donate-card .sec-label{color:var(--caramel)}
+.donate-card .sec-title{color:white;font-size:1.6rem}
+.donate-card p{color:var(--caramel-light);margin-bottom:1.5rem;font-size:0.92rem}
+.amounts{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1.25rem}
+.amt{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:0.7rem;text-align:center;cursor:pointer;transition:all 0.2s;color:white}
+.amt:hover,.amt.active{background:var(--caramel);border-color:var(--caramel)}
+.amt-n{font-family:Georgia,serif;font-size:1.15rem;font-weight:600;display:block}
+.amt-l{font-size:0.68rem;color:rgba(255,255,255,0.65);display:block;margin-top:0.1rem}
+.donate-btn{display:block;width:100%;background:var(--caramel);color:white;border:none;padding:0.8rem;border-radius:50px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:background 0.2s}
+.donate-btn:hover{background:var(--caramel-dark)}
+.impact-list{display:flex;flex-direction:column;gap:1rem;margin-top:1.75rem}
+.impact-item{display:flex;gap:0.9rem;align-items:flex-start;padding:1rem;background:var(--warm-white);border:1px solid var(--border);border-radius:14px}
+.impact-icon{font-size:1.6rem;flex-shrink:0}
+.impact-text strong{display:block;font-size:0.9rem;font-weight:600;color:var(--bark);margin-bottom:0.15rem}
+.impact-text span{font-size:0.82rem;color:var(--text-muted)}
+
+/* FOOTER */
+footer{background:var(--bark);color:var(--caramel-light);padding:2.5rem 1.5rem 1.75rem;text-align:center}
+.foot-logo{font-family:Georgia,serif;font-size:1.25rem;color:white;margin-bottom:0.4rem}
+.foot-tag{font-size:0.82rem;color:var(--caramel-light);margin-bottom:1.25rem}
+.foot-links{display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;list-style:none;margin-bottom:1.75rem}
+.foot-links a{color:rgba(243,223,192,0.7);text-decoration:none;font-size:0.82rem;transition:color 0.2s}
+.foot-links a:hover{color:var(--caramel-light)}
+.foot-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:1.25rem;font-size:0.75rem;color:rgba(243,223,192,0.5)}
+
+/* CART SIDEBAR */
+.cart-sidebar{position:fixed;top:0;right:0;bottom:0;width:360px;max-width:95vw;background:var(--warm-white);z-index:500;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.3s ease;border-left:1px solid var(--border)}
+.cart-sidebar.open{transform:translateX(0)}
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(30,15,5,0.4);z-index:499}
+.cart-overlay.open{display:block}
+.ch{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.25rem;border-bottom:1px solid var(--border);flex-shrink:0}
+.ch h2{font-family:Georgia,serif;font-size:1.1rem;color:var(--bark)}
+.close-btn{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text-muted);padding:2px 6px;border-radius:6px;transition:background 0.15s;line-height:1}
+.close-btn:hover{background:var(--caramel-pale)}
+.cart-body{flex:1;overflow-y:auto;padding:1rem 1.25rem}
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--text-muted)}
+.empty span{font-size:3rem;display:block;margin-bottom:0.6rem}
+.empty p{font-size:0.9rem}
+.ci{display:flex;gap:0.85rem;align-items:flex-start;padding:0.9rem 0;border-bottom:1px solid var(--border)}
+.ci:last-child{border-bottom:none}
+.ci-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.ci-info{flex:1}
+.ci-name{font-weight:600;font-size:0.9rem;color:var(--bark);margin-bottom:1px}
+.ci-unit{font-size:0.75rem;color:var(--text-muted);margin-bottom:0.4rem}
+.ci-ctrl{display:flex;align-items:center;gap:6px}
+.qb{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:var(--cream);font-size:0.95rem;cursor:pointer;color:var(--bark);display:flex;align-items:center;justify-content:center;transition:background 0.15s;line-height:1}
+.qb:hover{background:var(--caramel-pale)}
+.qn{font-size:0.88rem;font-weight:600;color:var(--bark);min-width:18px;text-align:center}
+.rm{background:none;border:none;cursor:pointer;font-size:0.75rem;color:var(--text-muted);padding:3px;border-radius:5px;margin-left:3px;transition:color 0.15s}
+.rm:hover{color:#b03030}
+.ci-price{font-weight:600;font-size:0.9rem;color:var(--caramel-dark);flex-shrink:0}
+.cart-foot{border-top:1px solid var(--border);padding:1.1rem 1.25rem;flex-shrink:0}
+.impact-note-cart{background:var(--sage-light);border-radius:10px;padding:0.6rem 0.9rem;font-size:0.78rem;color:var(--sage);font-weight:500;margin-bottom:0.85rem;text-align:center}
+.ct-row{display:flex;justify-content:space-between;font-size:0.88rem;color:var(--text-mid);margin-bottom:0.3rem}
+.ct-total{display:flex;justify-content:space-between;font-size:1rem;font-weight:600;color:var(--bark);margin-bottom:1rem;padding-top:0.45rem;border-top:1px solid var(--border)}
+.co-btn{display:block;width:100%;background:var(--caramel);color:white;border:none;padding:0.75rem;border-radius:50px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:background 0.2s}
+.co-btn:hover{background:var(--caramel-dark)}
+
+/* CHECKOUT PANEL */
+.co-panel{display:none;flex-direction:column;height:100%}
+.co-panel.active{display:flex}
+.cart-main{display:flex;flex-direction:column;height:100%}
+.cart-main.hide{display:none}
+.co-body{flex:1;overflow-y:auto;padding:1rem 1.25rem}
+.co-body h3{font-family:Georgia,serif;font-size:0.95rem;color:var(--bark);margin:1rem 0 0.5rem}
+.co-body h3:first-child{margin-top:0}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.6rem}
+.frow.full{grid-template-columns:1fr}
+.fg{display:flex;flex-direction:column;gap:3px}
+.fg label{font-size:0.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em}
+.fg input,.fg select{border:1px solid var(--border);border-radius:8px;padding:0.48rem 0.7rem;font-size:0.85rem;color:var(--text);background:var(--cream);font-family:inherit;outline:none;transition:border-color 0.15s}
+.fg input:focus,.fg select:focus{border-color:var(--caramel)}
+.sum-box{background:var(--cream);border-radius:10px;padding:0.7rem 0.9rem;margin-bottom:0.9rem}
+.sl{display:flex;justify-content:space-between;font-size:0.83rem;color:var(--text-mid);padding:2px 0}
+.sl.tot{font-weight:600;color:var(--bark);border-top:1px solid var(--border);margin-top:5px;padding-top:7px;font-size:0.9rem}
+.co-foot{border-top:1px solid var(--border);padding:1rem 1.25rem;display:flex;flex-direction:column;gap:0.5rem;flex-shrink:0}
+.po-btn{display:block;width:100%;background:var(--caramel);color:white;border:none;padding:0.75rem;border-radius:50px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:background 0.2s}
+.po-btn:hover{background:var(--caramel-dark)}
+.back-btn{background:none;border:none;cursor:pointer;font-size:0.83rem;color:var(--text-muted);text-align:center;padding:0.25rem;transition:color 0.15s}
+.back-btn:hover{color:var(--caramel)}
+
+/* SUCCESS */
+.success{display:none;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1.5rem;text-align:center;flex:1}
+.success.active{display:flex}
+.success .si{font-size:3.5rem;margin-bottom:0.9rem}
+.success h2{font-family:Georgia,serif;font-size:1.3rem;color:var(--bark);margin-bottom:0.6rem}
+.success p{font-size:0.88rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.4rem}
+.success .in{background:var(--sage-light);border-radius:10px;padding:0.8rem 1rem;margin-top:1rem;font-size:0.82rem;color:var(--sage);font-weight:500}
+.ks-btn{margin-top:1.25rem;background:var(--caramel);color:white;border:none;padding:0.65rem 1.75rem;border-radius:50px;font-size:0.9rem;font-weight:600;cursor:pointer;transition:background 0.2s}
+.ks-btn:hover{background:var(--caramel-dark)}
+
+@media(max-width:700px){.about-grid,.donate-grid{grid-template-columns:1fr;gap:2rem}.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<div class="cart-overlay" id="overlay" onclick="closeCart()"></div>
+
+<div class="cart-sidebar" id="sidebar">
+  <div class="cart-main" id="cartMain">
+    <div class="ch"><h2>🛍️ Your Bag</h2><button class="close-btn" onclick="closeCart()">✕</button></div>
+    <div class="cart-body" id="cartBody">
+      <div class="empty" id="emptyMsg"><span>🐾</span><p>Your bag is empty.<br>Add some treats!</p></div>
+    </div>
+    <div class="cart-foot" id="cartFoot" style="display:none">
+      <div class="impact-note-cart">🐶 Every purchase helps feed a dog in need</div>
+      <div class="ct-row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+      <div class="ct-row"><span>Shipping</span><span>Calculated at checkout</span></div>
+      <div class="ct-total"><span>Total</span><span id="total">$0.00</span></div>
+      <button class="co-btn" onclick="goCheckout()">Proceed to Checkout →</button>
+    </div>
+  </div>
+
+  <div class="co-panel" id="coPanel">
+    <div class="ch"><h2>Checkout</h2><button class="close-btn" onclick="closeCart()">✕</button></div>
+    <div class="co-body">
+      <h3>Contact</h3>
+      <div class="frow full"><div class="fg"><label>Email</label><input type="email" id="cemail" placeholder="you@email.com"></div></div>
+      <h3>Shipping</h3>
+      <div class="frow">
+        <div class="fg"><label>First name</label><input type="text" id="cfname" placeholder="Jane"></div>
+        <div class="fg"><label>Last name</label><input type="text" id="clname" placeholder="Smith"></div>
+      </div>
+      <div class="frow full"><div class="fg"><label>Address</label><input type="text" id="caddr" placeholder="123 Main St"></div></div>
+      <div class="frow">
+        <div class="fg"><label>City</label><input type="text" id="ccity" placeholder="San Diego"></div>
+        <div class="fg"><label>ZIP</label><input type="text" id="czip" placeholder="92101"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label>State</label><input type="text" id="cstate" placeholder="CA"></div>
+        <div class="fg"><label>Country</label><select id="ccountry"><option>United States</option><option>Canada</option><option>Other</option></select></div>
+      </div>
+      <h3>Payment</h3>
+      <div class="frow full"><div class="fg"><label>Card number</label><input type="text" id="ccard" placeholder="1234 5678 9012 3456" maxlength="19"></div></div>
+      <div class="frow">
+        <div class="fg"><label>Expiry</label><input type="text" id="cexp" placeholder="MM / YY" maxlength="7"></div>
+        <div class="fg"><label>CVV</label><input type="text" id="ccvv" placeholder="123" maxlength="4"></div>
+      </div>
+      <h3>Order summary</h3>
+      <div class="sum-box" id="coSum"></div>
+    </div>
+    <div class="co-foot">
+      <button class="po-btn" onclick="placeOrder()">Place Order 🐾</button>
+      <button class="back-btn" onclick="backToCart()">← Back to bag</button>
+    </div>
+  </div>
+
+  <div class="success" id="successView">
+    <div class="si">🎉</div>
+    <h2>Order placed!</h2>
+    <p>Thank you so much. A confirmation will be sent to your email.</p>
+    <p>Your treats are being baked fresh and ship within 2–3 business days.</p>
+    <div class="in">🐶 Your order just helped feed a dog in need. You're the best.</div>
+    <button class="ks-btn" onclick="resetCart()">Keep Shopping</button>
+  </div>
+</div>
+
+<nav>
+  <a href="#home" class="nav-logo">🐾 Lucky Dog Treats</a>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#donate" class="nav-cta">Donate</a></li>
+  </ul>
+  <button class="cart-btn" onclick="openCart()">🛍️ Bag <span class="cart-badge" id="badge">0</span></button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="eyebrow">Nonprofit Bakery · Est. 2026</div>
+  <h1>Baked with Love,<br><em>Given with Purpose</em></h1>
+  <p class="hero-sub">Every treat we bake funds food, shelter, and care for dogs in need. Your pup gets a snack — a rescue dog gets a second chance. (idk if you want labs and more mentioned)</p>
+  <div class="hero-btns">
+    <a href="#shop" class="btn btn-primary">Shop Treats</a>
+    <a href="#donate" class="btn btn-outline">Make a Donation</a>
+  </div>
+  <div class="badges">
+    <div class="badge"><span class="bi">🦴</span><span class="bl">All-Natural (switch for actual labels)</span></div>
+    <div class="badge"><span class="bi">🌾</span><span class="bl">Grain-Friendly (switch for actual labels)</span></div>
+    <div class="badge"><span class="bi">♻️</span><span class="bl">Eco Packaged (switch for actual labels)</span></div>
+    <div class="badge"><span class="bi">🏠</span><span class="bl">Shelter Funded (switch for actual labels)</span></div>
+  </div>
+</section>
+
+<div class="mission">
+  <p><span>100% of profits</span> go toward feeding and sheltering dogs waiting for their forever home. <span>No exceptions.</span></p>
+</div>
+
+<section class="shop" id="shop">
+  <div class="inner">
+    <div class="sec-label">Our Treats</div>
+    <h2 class="sec-title">Tail-wagging flavors,<br>handmade fresh</h2>
+    <p class="sec-desc">Description/ad of treats goes here.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-img" style="background:#FFF3E8">🥜</div>
+        <div class="card-body">
+          <div class="card-tag">Bestseller</div>
+          <div class="card-name">Treat 1</div>
+          <p class="card-desc">Treat 1 description goes here.</p>
+          <div class="card-foot">
+            <div class="card-price">$12 <span>/ 20 treats</span></div>
+            <button class="add-btn" onclick="addToCart('t1',this)">Add to bag</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#F0F7F0">🥕</div>
+        <div class="card-body">
+          <div class="card-tag">Vet's Pick</div>
+          <div class="card-name">Treat 2</div>
+          <p class="card-desc">Treat 2 description goes here.</p>
+          <div class="card-foot">
+            <div class="card-price">$10 <span>/ 24 treats</span></div>
+            <button class="add-btn" onclick="addToCart('t2',this)">Add to bag</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#FFF0F5">🫐</div>
+        <div class="card-body">
+          <div class="card-tag">New Arrival</div>
+          <div class="card-name">Treat 3</div>
+          <p class="card-desc">Treat 3 description goes here.</p>
+          <div class="card-foot">
+            <div class="card-price">$14 <span>/ 16 chews</span></div>
+            <button class="add-btn" onclick="addToCart('t3',this)">Add to bag</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background:#FFFAE8">🎁</div>
+        <div class="card-body">
+          <div class="card-tag">Gift Set</div>
+          <div class="card-name">Treat 4</div>
+          <p class="card-desc">Treat 4 description goes here.</p>
+          <div class="card-foot">
+            <div class="card-price">$32 <span>/ variety box</span></div>
+            <button class="add-btn" onclick="addToCart('t4',this)">Add to bag</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shop-note">🌱 All treats are sugar free and don't cause cancer or something. Maybe get reviewed by a vet to say reviewed by veterinaria professional.</div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-vis">
+        <span class="big-icon">🐶</span>
+        <p>Every bite makes a difference</p>
+        <div class="stats">
+          <div class="stat"><div class="stat-n">0</div><div class="stat-l">Dogs fed this year</div></div>
+          <div class="stat"><div class="stat-n">0</div><div class="stat-l">Shelter partners</div></div>
+          <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Profits donated</div></div>
+          <div class="stat"><div class="stat-n">0</div><div class="stat-l">Happy customers</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-label">Our Story</div>
+        <h2 class="sec-title">Started with one rescue.<br>Grown into a movement.</h2>
+        <p class="sec-desc">Lucky Dog Treats was born when... We wanted to give back, so we started baking.</p>
+        <p class="sec-desc" style="margin-top:0.9rem">Every bag sold directly funds meals, medical care, and enrichment activities for dogs in local (our partnered if you get them) shelters. We keep overhead low and give the rest.</p>
+        <ul class="values" style="margin-top:1.5rem">
+          <li>Transparent finances — our full annual report is publicly available (doesn't apply if not a business)</li>
+          <li>No intermediaries — we work directly with local shelters</li>
+          <li>Small-batch baking ensures freshness and quality in every bag</li>
+          <li>Packaging is 100% recyclable or compostable (remove if untrue)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="donate" id="donate">
+  <div class="inner">
+    <div class="donate-grid">
+      <div class="donate-card">
+        <div class="sec-label">Make a Gift</div>
+        <h2 class="sec-title">Every dollar goes<br>straight to the dogs</h2>
+        <p>Your one-time or monthly gift provides food, vet care, and love for dogs waiting for their families.</p>
+        <div class="amounts">
+          <div class="amt"><span class="amt-n">$10</span><span class="amt-l">Feeds 1 dog for a week (Get accurate numbers from a shelter)</span></div>
+          <div class="amt active"><span class="amt-n">$25</span><span class="amt-l">Covers a vet checkup</span></div>
+          <div class="amt"><span class="amt-n">$50</span><span class="amt-l">Sponsors a rescue</span></div>
+          <div class="amt"><span class="amt-n">$100</span><span class="amt-l">Funds a foster family</span></div>
+        </div>
+        <button class="donate-btn">Donate Now ♥</button>
+      </div>
+      <div>
+        <div class="sec-label">Your Impact</div>
+        <h2 class="sec-title">Where your money goes</h2>
+        <p class="sec-desc" style="margin-bottom:0">We're committed to radical transparency. Here's what every dollar funds:</p>
+        <div class="impact-list">
+          <div class="impact-item"><div class="impact-icon">🍽️</div><div class="impact-text"><strong>Daily meals at local/partner shelters</strong><span>Nutritious kibble and fresh water for every dog in our network, every single day.</span></div></div>
+          <div class="impact-item"><div class="impact-icon">🩺</div><div class="impact-text"><strong>Routine and emergency vet care</strong><span>Vaccinations, checkups, spay/neuter procedures, and urgent treatments when needed.</span></div></div>
+          <div class="impact-item"><div class="impact-icon">🏡</div><div class="impact-text"><strong>Enrichment and adoption support</strong><span>Toys, training sessions, and adoption event costs to help dogs find homes faster.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">🐾 Lucky Dog Treats</div>
+  <div class="foot-tag">A nonprofit bakery baking treats, changing lives.</div>
+  <ul class="foot-links">
+    <li><a href="#home">Home</a></li><li><a href="#shop">Shop</a></li>
+    <li><a href="#about">About</a></li><li><a href="#donate">Donate</a></li>
+    <li><a href="mailto:jake.mordan@gmail.com">Contact</a></li>
+  </ul>
+  <div class="foot-bottom">© 2026 Lucky Dog Treats · Nonprofit · Email:<br><span style="margin-top:0.3rem;display:block">Made with ♥ for every dog still waiting for their home</span></div>
+</footer>
+
+<script>
+const PRODUCTS={
+  t1:{name:'Treat 1',price:12,unit:'20 treats',icon:'🥜',bg:'#FFF3E8'},
+  t2:{name:'Treat 2',price:10,unit:'24 treats',icon:'🥕',bg:'#F0F7F0'},
+  t3:{name:'Treat 3',price:14,unit:'16 chews', icon:'🫐',bg:'#FFF0F5'},
+  t4:{name:'Treat 4',price:32,unit:'variety box',icon:'🎁',bg:'#FFFAE8'},
+};
+let cart={};
+
+function addToCart(id,btn){
+  cart[id]=(cart[id]||0)+1;
+  renderCart();
+  openCart();
+  btn.textContent='✓ Added!';
+  btn.classList.add('added');
+  setTimeout(()=>{btn.textContent='Add to bag';btn.classList.remove('added');},1400);
+}
+function changeQty(id,d){
+  cart[id]=(cart[id]||0)+d;
+  if(cart[id]<=0)delete cart[id];
+  renderCart();
+}
+function removeItem(id){delete cart[id];renderCart();}
+
+function renderCart(){
+  const ids=Object.keys(cart);
+  const qty=ids.reduce((s,id)=>s+cart[id],0);
+  const sub=ids.reduce((s,id)=>s+cart[id]*PRODUCTS[id].price,0);
+  const badge=document.getElementById('badge');
+  badge.textContent=qty;
+  badge.classList.toggle('show',qty>0);
+  const body=document.getElementById('cartBody');
+  const foot=document.getElementById('cartFoot');
+  if(!ids.length){
+    body.innerHTML='<div class="empty"><span>🐾</span><p>Your bag is empty.<br>Add some treats!</p></div>';
+    foot.style.display='none';return;
+  }
+  foot.style.display='';
+  body.innerHTML=ids.map(id=>{
+    const p=PRODUCTS[id],q=cart[id];
+    return`<div class="ci">
+      <div class="ci-icon" style="background:${p.bg}">${p.icon}</div>
+      <div class="ci-info">
+        <div class="ci-name">${p.name}</div>
+        <div class="ci-unit">${p.unit}</div>
+        <div class="ci-ctrl">
+          <button class="qb" onclick="changeQty('${id}',-1)">−</button>
+          <span class="qn">${q}</span>
+          <button class="qb" onclick="changeQty('${id}',1)">+</button>
+          <button class="rm" onclick="removeItem('${id}')">Remove</button>
+        </div>
+      </div>
+      <div class="ci-price">$${(q*p.price).toFixed(2)}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('subtotal').textContent='$'+sub.toFixed(2);
+  document.getElementById('total').textContent='$'+sub.toFixed(2);
+}
+
+function openCart(){
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('sidebar').classList.add('open');
+}
+function closeCart(){
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('sidebar').classList.remove('open');
+}
+function goCheckout(){
+  const ids=Object.keys(cart);
+  const sub=ids.reduce((s,id)=>s+cart[id]*PRODUCTS[id].price,0);
+  document.getElementById('coSum').innerHTML=
+    ids.map(id=>`<div class="sl"><span>${PRODUCTS[id].icon} ${PRODUCTS[id].name} × ${cart[id]}</span><span>$${(cart[id]*PRODUCTS[id].price).toFixed(2)}</span></div>`).join('')+
+    `<div class="sl tot"><span>Total</span><span>$${sub.toFixed(2)}</span></div>`;
+  document.getElementById('cartMain').classList.add('hide');
+  document.getElementById('coPanel').classList.add('active');
+}
+function backToCart(){
+  document.getElementById('coPanel').classList.remove('active');
+  document.getElementById('cartMain').classList.remove('hide');
+}
+function placeOrder(){
+  if(!document.getElementById('cemail').value.trim()||!document.getElementById('cfname').value.trim()||!document.getElementById('ccard').value.trim()){
+    alert('Please fill in your email, name, and card number.');return;
+  }
+  document.getElementById('coPanel').classList.remove('active');
+  document.getElementById('successView').classList.add('active');
+}
+function resetCart(){
+  cart={};renderCart();
+  document.getElementById('successView').classList.remove('active');
+  document.getElementById('cartMain').classList.remove('hide');
+  closeCart();
+}
+document.querySelectorAll('.amt').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.amt').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+}));
+const cc=document.getElementById('ccard');
+if(cc)cc.addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'').substring(0,16);e.target.value=v.replace(/(.{4})/g,'$1 ').trim();});
+const ce=document.getElementById('cexp');
+if(ce)ce.addEventListener('input',e=>{let v=e.target.value.replace(/\D/g,'').substring(0,4);if(v.length>=3)v=v.substring(0,2)+' / '+v.substring(2);e.target.value=v;});
+</script>
+</body></html>
